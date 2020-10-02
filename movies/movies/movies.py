@@ -57,7 +57,6 @@ def filter_movies():
     director_name = request.args.get("director", '')
 
     movie_ids = services.filter_movies(actor_name, director_name, genre_name, repo.repo_instance)
-    print(movie_ids)
     movies = services.get_movies_by_id(movie_ids[cursor: cursor + movies_per_page], repo.repo_instance)
     genres = get_genre_names(repo.repo_instance)
 

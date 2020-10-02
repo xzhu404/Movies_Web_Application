@@ -31,7 +31,6 @@ def get_random_movies(quantity, repo: AbstractRepository):
 # ============================================
 
 def movie_to_dict(movie: Movie):
-    # print([i.genre_name for i in movies.genres])
     movie_dict = {
         "id": movie.id,
         "title": movie.title,
