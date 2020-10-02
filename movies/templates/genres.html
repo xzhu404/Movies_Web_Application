@@ -1,0 +1,3 @@
+{% for genre in genres %}
+    <li><a href="{{ url_for("movies_bp.filter_movies") }}?genre={{ genre.lower() }}">{{ genre }}</a></li>
+{% endfor %}

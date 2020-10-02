@@ -1,0 +1,21 @@
+<div id="signupBox">
+    <form id="signupForm" method="post" action="{{ url_for('authentication_bp.register') }}"
+          onsubmit="return checkPassword()">
+        {{ sign_up_form.csrf_token }}
+        <fieldset id="signupbody">
+            <fieldset>
+                {{ sign_up_form.username.label }}
+                {{ sign_up_form.username }}
+            </fieldset>
+            <fieldset>
+                {{ sign_up_form.password.label }}
+                {{ sign_up_form.password }}
+            </fieldset>
+            <fieldset>
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" name="password" id="confirm-password" required/>
+            </fieldset>
+            {{ sign_up_form.submit }}
+        </fieldset>
+    </form>
+</div>

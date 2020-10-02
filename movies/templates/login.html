@@ -1,0 +1,17 @@
+<div id="loginBox">
+    <form id="loginForm" action="{{ url_for('authentication_bp.login') }}" method="post">
+        {{ login_form.csrf_token }}
+        <fieldset id="body">
+            <fieldset>
+                {{ login_form.username.label }}
+                {{ login_form.username }}
+            </fieldset>
+            <fieldset>
+                {{ login_form.password.label }}
+                {{ login_form.password }}
+            </fieldset>
+            {{ login_form.submit }}
+        </fieldset>
+        <span><a href="#">Forgot your password?</a></span>
+    </form>
+</div>

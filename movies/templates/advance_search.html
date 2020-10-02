@@ -1,0 +1,25 @@
+<div class="advanced-search">
+    <h4>Advanced Search</h4>
+    <form action="{{ url_for('movies_bp.filter_movies') }}" method="post">
+        {{ filter_form.csrf_token }}
+        <div class="search-genre">
+            {#                            <input type="text" value="Genre" onfocus="this.value = '';"#}
+            {#                                   onblur="if (this.value == '') {this.value = 'Genre';}">#}
+            {{ filter_form.genre }}
+        </div>
+        <div class="search-actor">
+            {#                            <input type="text" value="Actor" onfocus="this.value = '';"#}
+            {#                                   onblur="if (this.value == '') {this.value = 'Actor';}">#}
+            {{ filter_form.actor }}
+        </div>
+        <div class="search-director">
+            {#                            <input type="text" value="Director" onfocus="this.value = '';"#}
+            {#                                   onblur="if (this.value == '') {this.value = 'Director';}">#}
+            {{ filter_form.director }}
+        </div>
+        <div class="button">
+            {#                            <span><input type="submit" value="Search"></span>#}
+            {{ filter_form.submit }}
+        </div>
+    </form>
+</div>

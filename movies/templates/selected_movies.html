@@ -1,0 +1,5 @@
+{% for movie in selected_movies %}
+    <div class="hover">
+        <li><a href="{{ url_for('movies_bp.get_movie_by_id', id=movie.id) }}">{{ movie.title }}</a></li>
+    </div>
+{% endfor %}
