@@ -97,8 +97,5 @@ class PasswordValid:
     def __call__(self, form, field):
         schema = PasswordValidator()
         schema.min(8).has().uppercase().has().lowercase().has().digits()
-        print('--------密码限制条件', schema)
-        print('--------验证密码有效性：', schema.validate(field.data))
         if not schema.validate(field.data):
-            print('----------密码无效')
             raise ValidationError(self.message)
