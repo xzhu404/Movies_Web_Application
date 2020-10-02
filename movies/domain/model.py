@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import datetime
 from typing import List, Iterable
 
 
@@ -41,7 +41,7 @@ class Comment:
         self._user: User = user
         self._movie: Movie = movie
         self._comment: str = comment
-        self._timestamp: datetime = timestamp
+        self._timestamp: str = timestamp.strftime('%Y-%m-%d %H:%M:%S')
 
     @property
     def user(self) -> User:
@@ -56,7 +56,7 @@ class Comment:
         return self._comment
 
     @property
-    def timestamp(self) -> datetime:
+    def timestamp(self) -> str:
         return self._timestamp
 
     def __eq__(self, other):
@@ -159,6 +159,7 @@ class Director:
         if not isinstance(other, Director):
             return False
         return other._name == self._name
+
 
 class Movie:
     def __init__(self, id: int, title: str, description: str, year: int,

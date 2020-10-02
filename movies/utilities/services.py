@@ -1,7 +1,6 @@
 from typing import Iterable
 import random
 
-import movies.adapters.repository as repo
 from movies.adapters.repository import AbstractRepository
 from movies.domain.model import Movie
 from movies.movies.services import genres_to_dict, actors_to_dict

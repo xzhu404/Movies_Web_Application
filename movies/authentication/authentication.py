@@ -27,6 +27,7 @@ def register():
         # Use the service layer to attempt to add the new user.
         try:
             services.add_user(form.username.data, form.password.data, repo.repo_instance)
+            flash("Registration success!")
 
         except services.NameNotUniqueException:
             flash('Your username is already taken - please supply another')
@@ -36,14 +37,12 @@ def register():
     for error in form.password.errors:
         flash(error)
 
-    return redirect(url_for('home_bp.home'))
+    return redirect(url_for('home_bp.home'), code=201)
 
 
 @authentication_blueprint.route('/login', methods=['POST'])
 def login():
     form = utilities.LoginForm()
-    username_not_recognised = None
-    password_does_not_match_username = None
 
     if form.validate_on_submit():
         print(form.username.data, form.password.data)
@@ -62,11 +61,11 @@ def login():
 
         except services.UnknownUserException:
             # Username not known to the system, set a suitable error message.
-            username_not_recognised = 'Username not recognised - please supply another'
+            flash('Username not recognised - please supply another')
 
         except services.AuthenticationException:
             # Authentication failed, set a suitable error message.
-            password_does_not_match_username = 'Password does not match supplied username - please check and try again'
+            flash('Password does not match supplied username - please check and try again')
 
     # For a GET or a failed POST, return the Login Web page.
     return redirect(url_for("home_bp.home"))

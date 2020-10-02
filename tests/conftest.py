@@ -5,7 +5,7 @@ import pytest
 from config import BASE_DIR
 from movies import create_app
 from movies.adapters import memory_repository
-from movies.adapters.memory_repository import MemoryRepository, read_csv_file
+from movies.adapters.memory_repository import MemoryRepository
 
 TEST_DATA_PATH = os.path.join(BASE_DIR, "tests", "data")
 

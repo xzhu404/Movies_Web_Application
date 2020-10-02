@@ -31,13 +31,7 @@ def create_app(test_config=None):
         from .movies import movies
         app.register_blueprint(movies.movies_blueprint)
 
-        # from .details import details
-        # app.register_blueprint(details.details_blueprint)
-
         from .authentication import authentication
         app.register_blueprint(authentication.authentication_blueprint)
-        #
-        # from .utilities import utilities
-        # app.register_blueprint(utilities.utilities_blueprint)
 
     return app

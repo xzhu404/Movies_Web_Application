@@ -10,7 +10,7 @@
         <p class="para">
             <span class="details-title">Genres:</span>
             {% for genre in movie.genres %}
-                &nbsp;&nbsp;&nbsp;&nbsp;{{ genre.name }}&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('movies_bp.filter_movies', genre=genre.name.lower() ) }}">{{ genre.name }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
             {% endfor %}
         </p>
         <p class="para">
@@ -35,12 +35,12 @@
         </p>
         <p class="para">
             <span class="details-title">Director:&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            {{ movie.director.name }}
+            <a href="{{ url_for('movies_bp.filter_movies', director=movie.director.name.lower() ) }}">{{ movie.director.name }}</a>
         </p>
         <p class="para">
             <span class="details-title">Actors:</span>
             {% for actor in movie.actors %}
-                &nbsp;&nbsp;&nbsp;&nbsp;{{ actor.name }}&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('movies_bp.filter_movies', actor=actor.name.lower() ) }}">{{ actor.name }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
             {% endfor %}
         </p>
         <br>
@@ -53,8 +53,13 @@
         <br> <br>
         <p class="para">
             <span class="details-title">Comments:</span>
+            <span class="button new-comment">
+                <input id="new-comment" name="new-comment" type="button" value="New Comment">
+            </span>
         </p>
         <hr>
+        <textarea name="comment-text" id="comment-text" cols="30" rows="10"></textarea>
+        <br>
         <br>
         <div id="comments">
             {% if movie.comments|length == 0 %}
@@ -77,4 +82,49 @@
         </div>
     </div>
     <div class="clear"></div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        let username = '{{ username }}'
+        $('#new-comment').click(function () {
+            if (username === 'None') {
+                alert('You are not currently logged in, please log in first to perform this operation.')
+                window.scrollTo({
+                    left: 0,
+                    top: 0,
+                    behavior: 'smooth'
+                })
+                $('#loginBox').css('display', 'block')
+            } else {
+                let commentText = $("#comment-text").val()
+                if (commentText) {
+                    $.ajaxSetup({
+                        beforeSend: function (xhr, settings) {
+                            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                                xhr.setRequestHeader("X-CSRFToken", "{{ comment_form.csrf_token._value() }}")
+                            }
+                        }
+                    })
+
+                    $.ajax({
+                        url: '{{ url_for("movies_bp.comment") }}',
+                        type: 'POST',
+                        data: {
+                            comment: commentText,
+                            movieID: {{ movie.id }}
+                        },
+                        success: function (data) {
+                            console.log(data)
+                            if (data.success) {
+                                location.reload()
+                            }
+                        }
+                    })
+                } else {
+                    alert('Comment content cannot be empty.')
+                }
+            }
+        })
+    </script>
 {% endblock %}

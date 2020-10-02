@@ -196,11 +196,11 @@ body {
     font-family: trebuchet ms, arial, sans-serif;
 }
 
-.sign-ligin-btns ul li a.signup, .sign-ligin-btns ul li a.login,.sign-ligin-btns ul li a.logout {
+.sign-ligin-btns ul li a.signup, .sign-ligin-btns ul li a.login, .sign-ligin-btns ul li a.logout {
     color: #FFF;
 }
 
-.sign-ligin-btns ul li a.signup:hover, .sign-ligin-btns ul li a.login:hover, .sign-ligin-btns ul li a.logout:hover{
+.sign-ligin-btns ul li a.signup:hover, .sign-ligin-btns ul li a.login:hover, .sign-ligin-btns ul li a.logout:hover {
     background: #9B59B6;
 }
 
@@ -1265,7 +1265,7 @@ li.google a span:hover {
     opacity: 0.8;
 }
 
-.button input[type="submit"], .send_button input[type="submit"] {
+.button input[type="submit"], .button input[type="button"], .send_button input[type="submit"] {
     cursor: pointer;
     color: #FFF;
     font-size: 0.99em;
@@ -2052,7 +2052,7 @@ span strong, li strong {
 
 .comments {
     position: absolute;
-    top: 1em;
+    top: 2.5em;
     right: 1em;
 }
 
@@ -2103,4 +2103,20 @@ span strong, li strong {
 #logoutContainer {
     position: relative;
     float: left;
+}
+
+.new-comment {
+    float: right;
+}
+
+#new-comment {
+    margin-top: -1em;
+}
+
+#comment-text {
+    width: 100%;
+}
+
+.details a {
+    color: #9B59B6;
 }

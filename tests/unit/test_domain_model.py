@@ -1,5 +1,3 @@
-from datetime import date
-
 from movies.domain.model import User, Movie, Genre, Director, Actor, make_comment, make_genre_association, \
     make_actor_association, make_director_association, ModelException
 

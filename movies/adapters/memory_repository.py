@@ -1,13 +1,13 @@
 import csv
 import os
-from datetime import date, datetime
+from datetime import datetime
 from typing import List
 
-from bisect import bisect, bisect_left, insort_left
+from bisect import bisect_left, insort_left
 
 from werkzeug.security import generate_password_hash
 
-from movies.adapters.repository import AbstractRepository, RepositoryException
+from movies.adapters.repository import AbstractRepository
 from movies.domain.model import Movie, Genre, User, Comment, make_comment, Director, Actor, make_genre_association, \
     make_actor_association, make_director_association
 

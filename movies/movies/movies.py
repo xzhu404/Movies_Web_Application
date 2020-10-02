@@ -1,9 +1,10 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from flask import request, render_template, redirect, url_for, session
 
 import movies.adapters.repository as repo
 import movies.utilities.utilities as utilities
 import movies.movies.services as services
+from movies.authentication.authentication import login_required
 
 from movies.utilities.services import get_genre_names
 
@@ -18,6 +19,7 @@ def get_movie_by_id(id):
     filter_form = utilities.FilterForm()
     sign_up_form = utilities.RegistrationForm()
     login_form = utilities.LoginForm()
+    comment_form = utilities.CommentForm()
 
     movie = services.get_movie(id, repo.repo_instance)
     genres = get_genre_names(repo.repo_instance)
@@ -30,6 +32,7 @@ def get_movie_by_id(id):
         filter_form=filter_form,
         sign_up_form=sign_up_form,
         login_form=login_form,
+        comment_form=comment_form,
         username=username,
     )
 
@@ -92,3 +95,20 @@ def filter_movies():
         login_form=login_form,
         username=username,
     )
+
+
+@movies_blueprint.route('/comment', methods=['POST'])
+@login_required
+def comment():
+    username = session.get('username')
+    comment = request.form.get('comment', '')
+    movie_id = request.form.get('movieID', default=0, type=int)
+    print(username, comment, movie_id)
+    if not username or not comment or not movie_id:
+        return jsonify({
+            'success': False,
+        }), 200
+    services.add_comment(movie_id, comment, username, repo.repo_instance)
+    return jsonify({
+        "success": True,
+    }), 201
