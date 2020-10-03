@@ -50,7 +50,7 @@ E.g.
 
 `TEST_DATA_PATH = os.path.join(BASE_DIR, "tests", "data")`
 
-`BASE_DIR` is in the file *Movies_Web_Application/config.py*, and it's value is the root directory of the project *Movies_Web_Application*.
+`BASE_DIR` is in the file *Movies_Web_Application/config.py*, and its value is the root directory of the project *Movies_Web_Application*.
 
 assigns `TEST_DATA_PATH` with the following value (the use of os.path.join and os.sep ensures use of the correct platform path separator):
 
