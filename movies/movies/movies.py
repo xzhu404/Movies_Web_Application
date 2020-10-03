@@ -50,8 +50,7 @@ def filter_movies():
                                 director=filter_form.director.data))
 
     movies_per_page = 4
-    cursor = request.args.get("cursor", 0)
-    cursor = int(cursor)
+    cursor = request.args.get("cursor", 0, type=int)
 
     selected_movies = utilities.get_selected_movies()
 
@@ -103,7 +102,7 @@ def comment():
     username = session.get('username')
     comment = request.form.get('comment', '')
     movie_id = request.form.get('movieID', default=0, type=int)
-    print(username, comment, movie_id)
+
     if not username or not comment or not movie_id:
         return jsonify({
             'success': False,

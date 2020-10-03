@@ -13,8 +13,7 @@ def home():
     username = session.get('username')
 
     movies_per_page = 4
-    cursor = request.args.get("cursor", 0)
-    cursor = int(cursor)
+    cursor = request.args.get("cursor", 0, type=int)
 
     filter_form = utilities.FilterForm()
     sign_up_form = utilities.RegistrationForm()
